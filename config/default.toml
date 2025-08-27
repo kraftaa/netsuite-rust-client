@@ -1,0 +1,20 @@
+[netsuite]
+# NetSuite Account ID (e.g., "1234567")
+account_id = ""
+
+# OAuth Consumer Key (from NetSuite Integration record)
+consumer_key = ""
+
+# OAuth Consumer Secret (from NetSuite Integration record)
+consumer_secret = ""
+
+# OAuth Token ID (from NetSuite Access Token record)
+token_id = ""
+
+# OAuth Token Secret (from NetSuite Access Token record)
+token_secret = ""
+
+# NetSuite REST API base URL
+# For production: https://rest.na1.netsuite.com
+# For sandbox: https://rest.sandbox.netsuite.com
+base_url = "https://rest.na1.netsuite.com"
