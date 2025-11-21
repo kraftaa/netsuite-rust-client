@@ -51,10 +51,10 @@ Create a `.env` file in your project root:
 
 ```bash
 NETSUITE_ACCOUNT_ID=1234567
-NETSUITE_CONSUMER_KEY=your_consumer_key_here
-NETSUITE_CONSUMER_SECRET=your_consumer_secret_here
-NETSUITE_TOKEN_ID=your_token_id_here
-NETSUITE_TOKEN_SECRET=your_token_secret_here
+NETSUITE_CONSUMER_KEY=consumer_key
+NETSUITE_CONSUMER_SECRET=consumer_secret
+NETSUITE_TOKEN_ID=your_token_id
+NETSUITE_TOKEN_SECRET=your_token_secret
 NETSUITE_BASE_URL=https://rest.na1.netsuite.com
 ```
 
