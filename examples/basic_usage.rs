@@ -35,7 +35,7 @@ async fn main() -> Result<()> {
     };
     
     // Test connection
-    info!("🔍 Testing connection to NetSuite...");
+    info!("Testing connection to NetSuite...");
     match client.test_connection().await {
         Ok(_) => info!("✅ Successfully connected to NetSuite"),
         Err(e) => {
@@ -45,7 +45,7 @@ async fn main() -> Result<()> {
     }
     
     // Example: Try to fetch customers (will fail without real credentials)
-    info!("👥 Attempting to fetch customers...");
+    info!("Attempting to fetch customers...");
     match client.get_customers(Some(5)).await {
         Ok(customers) => {
             info!("✅ Successfully fetched {} customers", customers.len());

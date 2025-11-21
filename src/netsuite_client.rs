@@ -68,6 +68,112 @@ impl NetSuiteClient {
         }
     }
     
+    /// Fetch vendor payment transactions for specific date ranges
+    /// This implements your SQL-like query: SELECT * FROM Transaction WHERE Type='VendPymt' AND (createddate BETWEEN start_date AND end_date)
+    pub async fn get_vendor_payments(&self, start_date: &str, end_date: &str, limit: Option<u32>) -> Result<Vec<Transaction>> {
+        // Use the correct NetSuite endpoint for vendor payments (checks)
+        let mut url = format!("{}/rest/platform/v1/record/check", self.config.base_url);
+        
+        // Build query parameters
+        let mut params = Vec::new();
+        params.push("q=type IS VendPymt".to_string());
+        params.push(format!("q=createddate BETWEEN '{}' AND '{}'", start_date, end_date));
+        
+        if let Some(limit) = limit {
+            params.push(format!("limit={}", limit));
+        }
+        
+        // Join all parameters
+        url.push_str(&format!("?{}", params.join("&")));
+        
+        let response = self.http_client
+            .get(&url)
+            .headers(self.get_auth_headers()?)
+            .send()
+            .await?;
+        
+        if response.status().is_success() {
+            let transactions: TransactionResponse = response.json().await?;
+            Ok(transactions.records)
+        } else {
+            anyhow::bail!("Failed to fetch vendor payments: {}", response.status())
+        }
+    }
+    
+    /// Convenience method for 2024 vendor payments (keeps backward compatibility)
+    pub async fn get_vendor_payments_2024(&self, limit: Option<u32>) -> Result<Vec<Transaction>> {
+        self.get_vendor_payments("2024-05-01", "2024-08-31", limit).await
+    }
+    
+    /// Generic method to fetch transactions with custom filters
+    pub async fn get_transactions_with_filters(&self, filters: &[String], limit: Option<u32>) -> Result<Vec<Transaction>> {
+        // Use the correct NetSuite endpoint for transactions
+        // Note: NetSuite doesn't have a generic "transaction" endpoint
+        // You need to specify the specific record type
+        let mut url = format!("{}/rest/platform/v1/record/check", self.config.base_url);
+        
+        // Build query parameters from filters
+        let mut params = Vec::new();
+        for filter in filters {
+            params.push(format!("q={}", filter));
+        }
+        
+        if let Some(limit) = limit {
+            params.push(format!("limit={}", limit));
+        }
+        
+        // Join all parameters
+        if !params.is_empty() {
+            url.push_str(&format!("?{}", params.join("&")));
+        }
+        
+        let response = self.http_client
+            .get(&url)
+            .headers(self.get_auth_headers()?)
+            .send()
+            .await?;
+        
+        if response.status().is_success() {
+            let transactions: TransactionResponse = response.json().await?;
+            Ok(transactions.records)
+        } else {
+            anyhow::bail!("Failed to fetch transactions: {}", response.status())
+        }
+    }
+    
+    /// Fetch sales orders with custom filters
+    pub async fn get_sales_orders(&self, filters: &[String], limit: Option<u32>) -> Result<Vec<Transaction>> {
+        let mut url = format!("{}/rest/platform/v1/record/salesorder", self.config.base_url);
+        
+        // Build query parameters from filters
+        let mut params = Vec::new();
+        for filter in filters {
+            params.push(format!("q={}", filter));
+        }
+        
+        if let Some(limit) = limit {
+            params.push(format!("limit={}", limit));
+        }
+        
+        // Join all parameters
+        if !params.is_empty() {
+            url.push_str(&format!("?{}", params.join("&")));
+        }
+        
+        let response = self.http_client
+            .get(&url)
+            .headers(self.get_auth_headers()?)
+            .send()
+            .await?;
+        
+        if response.status().is_success() {
+            let transactions: TransactionResponse = response.json().await?;
+            Ok(transactions.records)
+        } else {
+            anyhow::bail!("Failed to fetch sales orders: {}", response.status())
+        }
+    }
+    
     fn get_auth_headers(&self) -> Result<HeaderMap> {
         let mut headers = HeaderMap::new();
         
@@ -94,6 +200,30 @@ pub struct Customer {
     pub email: Option<String>,
     pub phone: Option<String>,
     pub datecreated: Option<String>,
+}
+
+// New transaction data structures
+#[derive(Debug, Deserialize)]
+pub struct TransactionResponse {
+    pub records: Vec<Transaction>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Transaction {
+    pub id: String,
+    pub trandate: Option<String>,
+    pub createddate: Option<String>,
+    pub transaction_type: Option<String>,  // Changed from 'type' to 'transaction_type'
+    pub memo: Option<String>,
+    pub amount: Option<f64>,
+    pub currency: Option<String>,
+    pub entity: Option<EntityReference>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct EntityReference {
+    pub id: String,
+    pub name: Option<String>,
 }
 
 // Error types - keeping for future use

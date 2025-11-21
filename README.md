@@ -43,7 +43,7 @@ Available CLI commands:
 - `customers` - List customers (requires real credentials)
 - `quit` or `exit` - Exit the CLI
 
-## 🔧 Configuration
+## Configuration
 
 ### Option 1: Environment Variables
 
@@ -182,7 +182,7 @@ cargo run --example basic_usage
 - Rotate your OAuth tokens regularly
 - Consider using NetSuite's sandbox environment for testing
 
-## 📝 Development Notes
+## Development Notes
 
 The project successfully compiles and runs with:
 - Configuration loading
