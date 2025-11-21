@@ -6,16 +6,16 @@ A Rust client for interacting with NetSuite's REST API, featuring OAuth 2.0 auth
 
 **The foundation is complete and working!** You now have:
 
-- 🔐 **OAuth 2.0 client setup** (ready for real credentials)
-- 📡 **HTTP client** for REST API calls
-- ⚙️ **Configuration management** (TOML files + environment variables)
-- 📝 **Structured logging** with tracing
-- 🛡️ **Comprehensive error handling**
-- 🚀 **Async/await support** with Tokio
-- 🖥️ **Interactive CLI** for testing
-- 📚 **Library and binary targets**
+- **OAuth 2.0 client setup** (ready for real credentials)
+- **HTTP client** for REST API calls
+- **Configuration management** (TOML files + environment variables)
+- **Structured logging** with tracing
+- **Comprehensive error handling**
+- **Async/await support** with Tokio
+- **Interactive CLI** for testing
+- **Library and binary targets**
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Build the Project
 
@@ -65,7 +65,7 @@ The client automatically looks for configuration files in this order:
 2. `config/local.toml` (local overrides)
 3. Environment variables (highest priority)
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before using this client with real NetSuite data, you need to set up OAuth 2.0 integration in NetSuite:
 
@@ -81,7 +81,7 @@ Before using this client with real NetSuite data, you need to set up OAuth 2.0 i
 
 3. **Enable REST API access** for your NetSuite account
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 src/
@@ -97,7 +97,7 @@ examples/
 └── basic_usage.rs       # Example usage patterns
 ```
 
-## 📖 Usage Examples
+## Usage Examples
 
 ### Basic Usage
 
@@ -129,7 +129,7 @@ async fn main() -> Result<()> {
 - `get_customers(limit)` - Fetch customer records
 - More methods coming soon...
 
-## 🔄 Next Steps
+## Next Steps
 
 Now that the foundation is working, here's what you can do next:
 
@@ -151,7 +151,7 @@ Now that the foundation is working, here's what you can do next:
 - [ ] **Data validation** and sanitization
 - [ ] **Performance optimizations**
 
-## 🧪 Testing
+## Testing
 
 ### Build Check
 ```bash
@@ -168,14 +168,14 @@ cargo test
 cargo run --example basic_usage
 ```
 
-## 🚨 Current Limitations
+## Current Limitations
 
 - **OAuth flow not fully implemented** - currently uses basic auth headers
 - **Limited entity types** - only Customer implemented so far
 - **No rate limiting** - could hit NetSuite API limits
 - **Basic error handling** - needs more sophisticated error types
 
-## 🔒 Security Notes
+## Security Notes
 
 - Never commit your `.env` file or `config/local.toml` to version control
 - Use environment variables in production deployments
@@ -185,14 +185,14 @@ cargo run --example basic_usage
 ## 📝 Development Notes
 
 The project successfully compiles and runs with:
-- ✅ Configuration loading
-- ✅ Client initialization  
-- ✅ Logging and error handling
-- ✅ CLI interface
-- ✅ Basic API structure
+- Configuration loading
+- Client initialization  
+- Logging and error handling
+- CLI interface
+- Basic API structure
 
 The DNS errors you see are expected when using placeholder URLs - this confirms the error handling is working correctly.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
