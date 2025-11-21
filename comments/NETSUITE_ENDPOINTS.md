@@ -54,7 +54,7 @@ YYYY-MM-DD  # ISO format (supported)
 MM/DD/YYYY  # US format (may not work)
 ```
 
-## 🔧 **How to Verify Correct Endpoints**
+## **How to Verify Correct Endpoints**
 
 ### **1. Check NetSuite Documentation**
 - Go to NetSuite Help: REST API > REST API Reference
@@ -71,7 +71,7 @@ MM/DD/YYYY  # US format (may not work)
 - Verify which API version is enabled
 - Check if specific record types are accessible
 
-## 📝 **Example Usage**
+## **Example Usage**
 
 ### **Vendor Payments (Checks)**
 ```rust
@@ -91,7 +91,7 @@ let sales_orders = client.get_sales_orders(&["createddate BETWEEN '2024-01-01' A
 let customers = client.get_customers(Some(25)).await?;
 ```
 
-## 🚀 **Adding New Record Types**
+## **Adding New Record Types**
 
 To add support for a new record type:
 
@@ -100,7 +100,7 @@ To add support for a new record type:
 3. **Create appropriate data structures** for the response
 4. **Add CLI commands** for testing
 
-## 💡 **Pro Tips**
+## **Pro Tips**
 
 1. **Start with known working endpoints** like `/record/customer`
 2. **Test in sandbox first** before production
@@ -108,7 +108,7 @@ To add support for a new record type:
 4. **Use proper error handling** - endpoints can change between versions
 5. **Keep endpoint URLs configurable** for easy updates
 
-## 🔍 **Troubleshooting**
+## **Troubleshooting**
 
 ### **Common Issues**
 - **404 Not Found**: Endpoint doesn't exist or is incorrect
