@@ -4,7 +4,6 @@ A Rust client for interacting with NetSuite's REST API, featuring OAuth 2.0 auth
 
 ## ✅ Current Status
 
-**The foundation is complete and working!** You now have:
 
 - **OAuth 2.0 client setup** (ready for real credentials)
 - **HTTP client** for REST API calls
@@ -14,6 +13,7 @@ A Rust client for interacting with NetSuite's REST API, featuring OAuth 2.0 auth
 - **Async/await support** with Tokio
 - **Interactive CLI** for testing
 - **Library and binary targets**
+- ** rustup default 1.90.0**
 
 ## Quick Start
 
@@ -47,14 +47,14 @@ Available CLI commands:
 
 ### Option 1: Environment Variables
 
-Create a `.env` file in your project root:
+Create a `.env` file in the project root:
 
 ```bash
 NETSUITE_ACCOUNT_ID=1234567
 NETSUITE_CONSUMER_KEY=consumer_key
 NETSUITE_CONSUMER_SECRET=consumer_secret
-NETSUITE_TOKEN_ID=your_token_id
-NETSUITE_TOKEN_SECRET=your_token_secret
+NETSUITE_TOKEN_ID=token_id
+NETSUITE_TOKEN_SECRET=token_secret
 NETSUITE_BASE_URL=https://rest.na1.netsuite.com
 ```
 
@@ -79,7 +79,7 @@ Before using this client with real NetSuite data, you need to set up OAuth 2.0 i
    - Create a new access token
    - Note down the Token ID and Token Secret
 
-3. **Enable REST API access** for your NetSuite account
+3. **Enable REST API access** for NetSuite account
 
 ## Project Structure
 
@@ -177,9 +177,9 @@ cargo run --example basic_usage
 
 ## Security Notes
 
-- Never commit your `.env` file or `config/local.toml` to version control
+- Never commit `.env` file or `config/local.toml` to version control
 - Use environment variables in production deployments
-- Rotate your OAuth tokens regularly
+- Rotate OAuth tokens regularly
 - Consider using NetSuite's sandbox environment for testing
 
 ## Development Notes
